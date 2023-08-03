@@ -99,3 +99,47 @@ From Students
 Join Enrollments On Students.StudentID = Enrollments.StudentID
 Join Courses On Enrollments.CourseID = Courses.CourseID 
 GROUP BY LastName;
+
+create table users(
+	id int PRIMARY KEY	AUTO_INCREMENT,
+	username varchar(255) NOT NULL,
+	email varchar(255) NOT null,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+create table orders(
+	order_id int PRIMARY KEY AUTO_INCREMENT,
+	users_id int,
+	INDEX(users_id),
+	product varchar(255) NOT NULL,
+	quantity int NOT NULL,
+	order_date DATE
+	
+)
+
+insert into users(id, username, email, created_at) 
+VALUES 
+(1, "user1", "user1@example.com", NOW()),
+(2, "user2", "user2@example.com", NOW()),
+(3, "user3", "user3@example.com", NOW()),
+(4, "user4", "user4@example.com", NOW()),
+(5, "user5", "user5@example.com", NOW());
+
+insert into orders(order_id, users_id, product, quantity, order_date) VALUES
+(1,1,'Product A', 3, "2023-08-01"),
+(2,1,'Product B', 1, "2023-08-01"),
+(3,2,'Product A', 2, "2023-08-02"),
+(4,3,'Product C', 5, "2023-08-02"),
+(5,4,'Product B', 2, "2023-08-03"),
+(6,5,'Product D', 4, "2023-08-03"),
+(7,1,'Product A', 1, "2023-08-04"),
+(8,3,'Product B', 3, "2023-08-04"),
+(9,2,'Product C', 2, "2023-08-05"),
+(10,3,'Product D', 1, "2023-08-05");
+
+select product, sum(quantity), avg(quantity) from orders GROUP BY product;
+
+
+
+
+
