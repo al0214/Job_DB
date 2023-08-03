@@ -7,21 +7,22 @@ CREATE TABLE user(
     creUser DATE not null
 );
 
-CREATE TABLE tab(
-    tab_id INT not null primary key ,
+CREATE TABLE post(
+    post_id int AUTO_INCREMENT not null primary key ,
     user_id varchar(10)not null,
-    title varchar(20) not null,
-    content varchar(500) not null,
-    creTab DATETIME,
+    title varchar(100) not null,
+    content varchar(1500) not null,
+    crepost DATETIME,
     FOREIGN KEY (user_id) references user(user_id)
 );
 
 CREATE TABLE comment(
-  comment_id INT not null primary key ,
+  comment_id INT auto_increment not null primary key ,
   user_id varchar(10) not null ,
   co_content varchar(20) not null ,
   creComen DATETIME,
-  tab_id Int not null,
+  post_id Int not null,
+  INDEX idx_cooment(comment_id),
   foreign key (user_id) references user(user_id),
-  foreign key (tab_id) references tab(tab_id)
+  foreign key (post_id) references post(post_id)
 );
